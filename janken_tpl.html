@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-3.6.1.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>後出しジャンケン</title>
+</head>
+<body>
+
+<header>
+  <h1><img src="./img/00_title.png" alt=""></h1>
+</header>
+
+<main>
+  <!-- start button -->
+  <button id="start"><img src="./img/01_start.jpg" alt=""></button>
+  
+  <!-- transition -->
+  <img src="./img/02_battle.webp" alt="" id="jankenStart">
+
+  <div id="battle">
+  
+    <!-- playerの手 -->
+    <ul id="playerBtn">
+      <li id="gu_btn"><img src="./img/04_01_gu.png" alt=""></li>
+      <li id="cho_btn"><img src="./img/04_02_cho.png" alt=""></li>
+      <li id="par_btn"><img src="./img/04_03_par.png" alt=""></li>
+    </ul>
+
+    <!-- computerの手 -->
+    <div id="pc_hands"><img src="./img/05_01_comp_gu.png" alt="" id="pc_goku"></div>
+
+  </div>
+  
+  <!-- 勝敗 -->
+  <div id="judgement"></div>
+
+  <!-- 再戦ボタン -->
+  <button id="rematch"><img src="./img/03_rematch.jpg" alt=""></button>
+
+  <div id="rule">
+  <h2>ルール</h2>
+  <h3>・コンピューターの出す手が画面右側に表示されます</h3>
+  <h3>・自分の出す手は画面左側に表示されます。コンピューターの手に勝てる手を選んでください</h3>
+  <h3>・あいこ、負け、時間切れとなったら失敗です</h3>
+  </div>
+
+</main>
+
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+
+// キーボードの矢印ボタンとPlayerボタンの連動
+// ルール説明の追加
+// 5回勝負（勝敗の記録と表示）
+
+
+$(function(){
+  //デフォルト表示要素を指定 
+  $("#start").show();
+  $("#battle").hide();
+  $("#judgement").hide();
+  $("#rematch").hide();
+  
+  $(function(){
+    // ボタン押した後の動作
+    $("#start").on("click", function(){
+      $("#start").hide();
+      $("#jankenStart").fadeIn(1500);
+      $("#jankenStart").fadeOut(1500);
+      $("#rule").hide();
+      
+      // 
+      setTimeout(function(){
+        $("#battle").show()
+      }, 3000
+      );
+
+      setTimeout(function(){
+         $("#judgement").show()
+      }, 3000)
+
+      // コンピューターの手を表示
+      let comp = Math.ceil(Math.random()*3)
+      if (comp == 1) {
+      $("#pc_goku").attr(`src`, "./img/05_01_comp_gu.png");
+      }else if (comp == 2) {
+      $("#pc_goku").attr(`src`, "./img/05_02_comp_cho.jpeg");
+      }else if (comp = 3) {
+      $("#pc_goku").attr(`src`, "./img/05_03_comp_par.png");
+      }
+      
+      // ボタンを押した時に時間切れ表示が出ないよう変数宣言しておく
+      let playerHand = 0;
+
+      // Playerボタンを押した時の挙動
+      $("#gu_btn").on("click", function(){
+      playerHand = 1;
+      if (comp == 1) {
+        $("#judgement").text("あいこ = 失敗...");
+      }else if (comp == 2) {
+        $("#judgement").text("あなたの勝ち = 成功!!");
+      }else if (comp = 3) {
+        $("#judgement").text("あなたの負け = 失敗...");
+      }
+      $("#rematch").show();
+      });
+
+      $("#cho_btn").on("click", function(){
+      playerHand = 2;
+      if (comp == 1) {
+        $("#judgement").text("あなたの負け = 失敗...");
+      }else if (comp == 2) {
+        $("#judgement").text("あいこ = 失敗...");
+      }else if (comp = 3) {
+        $("#judgement").text("あなたの勝ち = 成功!!")
+      }
+      $("#rematch").show();
+      });
+  
+      $("#par_btn").on("click", function(){
+      playerHand = 3;
+      if (comp == 1) {
+        $("#judgement").text("あなたの勝ち = 成功!!");
+      }else if (comp == 2) {
+        $("#judgement").text("あなたの負け = 失敗...");
+      }else if (comp = 3) {
+        $("#judgement").text("あいこ = 失敗...")
+      }
+      $("#rematch").show();
+      });
+
+      // 時間切れ処理
+      setTimeout(function(){
+        if (playerHand == 0) {
+        $("#judgement").text("時間切れ! 失敗...");
+        $("#battle").hide();
+        $("#rematch").show();
+      }
+      }, 5000)
+
+      // 再戦（更新）ボタン
+    $("#rematch").on("click", function(){
+      location.reload();
+    })
+
+    })
+  })  
+})
+
+  
+
+    
+  
+
+</script>
+</body>
+</html>

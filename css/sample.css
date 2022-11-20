@@ -1,0 +1,76 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:center;
+    font-size: 32px;
+}
+header{
+    background-color: #fff;
+    text-align: center;
+    height: 125px;
+}
+footer{
+    background-color: #fff;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+#playerBtn{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:inline-flex;  /* 定義 */
+    flex-direction: column;
+    table-layout: fixed;
+    width:50%;
+    height: auto;
+}
+li{
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+li:hover{
+    background: #0066CC;
+    color:#fff;
+}
+#gu_btn img {
+    width: 33.3%;
+    height: auto;
+}
+#cho_btn img {
+    width: 33.3%;
+    height: auto;
+}
+#par_btn img {
+    width: 33.3%;
+    height: auto;
+}
+#jankenStart {
+    display: none;
+}
+#start {
+    display: flex;
+    margin: 0 auto;
+    border: 0;
+    cursor: pointer;
+}
+#battle {
+    display: flex;
+    align-items: center;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+#pc_hands {
+    border: 1px solid #666;
+    margin: 0 auto;
+}
+h3 {
+    font-size: 24px;
+}
